@@ -18,3 +18,8 @@ label{
 #theForm {
     background-color: lightgray;
 }
+
+#theForm input[type=submit] {
+    background-color:forestgreen;
+    color:white;
+}
