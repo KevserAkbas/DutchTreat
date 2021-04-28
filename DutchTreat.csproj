@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\img\けんたま\**" />
+    <Content Remove="wwwroot\img\けんたま\**" />
+    <EmbeddedResource Remove="wwwroot\img\けんたま\**" />
+    <None Remove="wwwroot\img\けんたま\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\index.html" />
+  </ItemGroup>
+
+</Project>
