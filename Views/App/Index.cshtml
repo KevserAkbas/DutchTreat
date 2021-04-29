@@ -2,73 +2,56 @@
     ViewBag.Title = "Home Page";
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title>Dutch Treat: @ViewBag.Title</title>
-
-    @* Dutch Treat: @ViewBag.Title --> bunun sayfada referans verilen bir 
-        C# olacaðý anlamýna geliyor ve sonra sadece uygulamanýn adýný kullanabilirm  *@
-
-    <link href="~/css/site.css" rel="stylesheet" />
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-</head>
-<body>
-    <h2> @ViewBag.Title</h2>
-    <div class="product-info">
-        <img src="~/img/1467883609212.jpg" />
-        <h3>Mug</h3>
-        <ul class="product-props">
-            <li>Price:$9.99</li>
-            <li>Artist:</li>
-            <li>Title:</li>
-            <li>Description: Self-portrait</li>
-        </ul>
-        <button id="byButton">Buy</button>
-    </div>
-    <div id="theForm">
-        <form>
-            <label>Your Name:</label>
-            <br />
+<h2> @ViewBag.Title</h2>
+<div class="product-info">
+    <img src="~/img/1467883609212.jpg" />
+    <h3>Mug</h3>
+    <ul class="product-props">
+        <li>Price:$9.99</li>
+        <li>Artist:</li>
+        <li>Title:</li>
+        <li>Description: Self-portrait</li>
+    </ul>
+    <button id="byButton">Buy</button>
+</div>
+<div id="theForm">
+    <form>
+        <label>Your Name:</label>
+        <br />
+        <input />
+        <br />
+        <label>Email:</label>
+        <br />
+        <input type="email" />
+        <br />
+        <label>Subject:</label>
+        <br />
+        <input type="text" />
+        <br />
+        <label>Message:</label>
+        <br />
+        <textarea rows="4"></textarea>
+        <br />
+        <input type="submit" value="Send Message" />
+    </form>
+</div>
+<div>
+    <div id="loginToggle">Login</div>
+    <form class="popup-form">
+        <div>
+            <label>Username</label>
             <input />
-            <br />
-            <label>Email:</label>
-            <br />
-            <input type="email" />
-            <br />
-            <label>Subject:</label>
-            <br />
-            <input type="text" />
-            <br />
-            <label>Message:</label>
-            <br />
-            <textarea rows="4"></textarea>
-            <br />
-            <input type="submit" value="Send Message" />
-        </form>
-    </div>
-    @*<div>
-        <div id="loginToggle">Login</div>
-        <form class="popup-form">
-            <div>
-                <label>Username</label>
-                <input />
-            </div>
-            <div>
-                <label>Password</label>
-                <input type="password" />
-            </div>
-            <div>
-                <input type="checkbox" />
-                <label>Remember Me?</label>
-            </div>
-            <div>
-                <input type="submit" value="Login" />
-            </div>
-        </form>
-    </div>*@
-    <script src="~/js/index.js"></script>
-
-</body>
-</html>
+        </div>
+        <div>
+            <label>Password</label>
+            <input type="password" />
+        </div>
+        <div>
+            <input type="checkbox" />
+            <label>Remember Me?</label>
+        </div>
+        <div>
+            <input type="submit" value="Login" />
+        </div>
+    </form>
+</div>

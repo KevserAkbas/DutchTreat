@@ -1,0 +1,17 @@
+@*MVC baþlangýç sayfasý*@
+@*her sayfanýn yanýt verebilmesi için views klasöründe.*@
+@*varsayýlan olarak düzeni burada oluþturduðumuz ve paylaþtýðýmýz bu adlandýrýlmýþ düzene ayarlýyor.*@
+@*Bu, tüm görünümler için etkili bir temel sýnýf oluþturur.*@
+@*Bu, görüntülendikçe bu görünümlerin(view larýn) her birinde yürütülür*@
+
+@*istek geliyor
+index.cshtml e bakýyor ve gidiyor
+bir düzen(layout) var o yüzden içeriði alalým diyor
+onlarý oluþturduktan sonra onlarý layout a (düzene) yapýþtýralým
+tüm layout dosyasýný alýr ve ardýndan tarayýcýya geri gönderir
+bu sayede tekrar kod yazýmý olmaz ve iþlemler tek bir yerde yapýlýr*@
+
+
+@{ 
+    Layout = "_Layout";
+}

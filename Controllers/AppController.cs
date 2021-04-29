@@ -17,8 +17,9 @@ namespace DutchTreat.Controllers
         // nihayetinde geri getirmenin yollarından biridir. 
         public IActionResult Index()
         {
-            throw new InvalidProgramException("Bad things happen to good developers");
+            
             return View();
+            throw new InvalidProgramException("Bad things happen to good developers");
         }
     }
 }
