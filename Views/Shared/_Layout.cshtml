@@ -1,19 +1,32 @@
 <!DOCTYPE html>
 <html>
-<head>    
+<head>
     <title>Dutch Treat: @ViewBag.Title</title>
     <link href="~/css/site.css" rel="stylesheet" />
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
 </head>
 <body>
-    <header>Welcome to Dutch Treat</header>
+    <header>
+        <h1>Welcome to Dutch Treat</h1>
+        <menu>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/app/contact">Contact</a></li>
+                <li><a href="/app/about">About</a></li>
+            </ul>
+        </menu>
+    </header>
 
     @* section -> sayfalarda deðiþmesi istenen görsel alan *@
-<section>
-    <h2>@ViewBag.Title</h2>
-    @* RenderBody --> bir cshtml dosyasýnýn gövdesini alacak ve onu oluþtururken buraya yapýþtýracak*@
-    @RenderBody()
-</section>
+    <section>
+
+        <h2>@ViewBag.Title</h2>
+
+        @* RenderBody --> bir cshtml dosyasýnýn gövdesini alacak ve onu oluþtururken buraya yapýþtýracak*@
+        @RenderBody()
+
+    </section>
+
     <footer>Copyright 2021 Dutch Treat LLc</footer>
     <script src="~/js/index.js"></script>
 
