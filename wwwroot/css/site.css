@@ -1,17 +1,17 @@
 ﻿body {
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 input[type=submit] {
     width: auto;
 }
 
-input,textarea{
+input, textarea {
     font-size: 18px;
-    width:200px;
-}   
+    width: 200px;
+}
 
-label{
+label {
     font-size: 16px;
 }
 
@@ -19,31 +19,55 @@ label{
     background-color: lightgray;
 }
 
-#theForm input[type=submit] {
-    background-color:forestgreen;
-    color:white;
+    #theForm input[type=submit] {
+        background-color: forestgreen;
+        color: white;
+    }
+
+ul.product-props {
+    font-size: small;
 }
 
-ul.product-props{
-    font-size:small;
-}
+    ul.product-props li {
+        list-style-type: none;
+    }
 
-ul.product-props li{
-    list-style-type:none;
-}
-
-.product-info{
-    border:1px solid grey;
-    display:inline-block; /*yan yana birden fazla blok olmasını söyler*/
+.product-info {
+    border: 1px solid grey;
+    display: inline-block; /*yan yana birden fazla blok olmasını söyler*/
     padding: 5px;
     margin: 2px;
     width: 450px;
     background-color: lightgray;
     border-radius: 5px; /*çerçevenin köşeleri yuvarlak olur*/
 }
-.product-info img{
-    margin: 3px;
-    float:left; /*img nesnesi dışındaki nesnelrin sağında görünmesini engellemez*/
-    border: 1px solid black;
-    max-width: 150px; /*görselin maksimum genişliği*/
+
+    .product-info img {
+        margin: 3px;
+        float: left; /*img nesnesi dışındaki nesnelrin sağında görünmesini engellemez*/
+        border: 1px solid black;
+        max-width: 150px; /*görselin maksimum genişliği*/
+    }
+
+#loginToggle {
+    cursor: pointer;
 }
+
+.popup-form {
+    padding: 5px;
+    border: 2px black inset;
+    display: inline-block;
+}
+
+    .popup-form input {
+        width: 200px;
+    }
+
+    .popup-form label {
+        width: 150px;
+        display: inline-block;
+    }
+
+    .popup-form input[type=checkbox], .popup-form input[type=submit] {
+        width: auto;
+    }
