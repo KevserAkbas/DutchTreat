@@ -15,4 +15,8 @@
     <None Include="wwwroot\index.html" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\App\" />
+  </ItemGroup>
+
 </Project>
