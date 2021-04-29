@@ -21,6 +21,7 @@ namespace DutchTreat.Controllers
             return View();
             //throw new InvalidProgramException("Bad things happen to good developers");
         }
+        [HttpGet("contact")]
         public IActionResult Contact()
         {
             //sayfa başlığını doğrudan burada controller da ayarlamak için ViewBag.Titlr kullanıdı
