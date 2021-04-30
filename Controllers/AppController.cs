@@ -18,7 +18,7 @@ namespace DutchTreat.Controllers
         // nihayetinde geri getirmenin yollarından biridir. 
         public IActionResult Index()
         {
-            
+
             return View();
             //throw new InvalidProgramException("Bad things happen to good developers");
         }
@@ -27,7 +27,7 @@ namespace DutchTreat.Controllers
         [HttpGet("contact")]
         public IActionResult Contact()
         {
-           
+
             //throw new InvalidProgramException("Bad things happen");
             return View();
         }
@@ -40,6 +40,16 @@ namespace DutchTreat.Controllers
             //input ve text alanlarının adları(name) veya formda kullandığımız alanı
             //ContactViewModel in özelliklerine eşleyecektir.
 
+            //if-else yapısı ile sunucuya veri getirildiğinde,
+            //viewModel e koyululan kuralların gerçekten uygulandığından emin olma yoludur 
+            if (ModelState.IsValid)
+            { //çağrı geldiğinde ModelState in geçerli olup olmadığını kontrol eder
+                
+            }
+            else
+            {
+                //ModelState geçerli 
+            }
             return View();
         }
 

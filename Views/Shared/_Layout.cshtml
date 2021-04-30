@@ -30,5 +30,9 @@
     <footer>Copyright 2021 Dutch Treat LLc</footer>
     <script src="~/js/index.js"></script>
 
+    @*RenderSection -> view ý kullanan sayfalarda onlarý sayfanýn belirli bölümlerine enjekte 
+        etmek için kullanýlabilecek bir bölüm oluþturmamýza olanak tanýr*@  
+    @RenderSection("Scripts",false)
+
 </body>
 </html>
