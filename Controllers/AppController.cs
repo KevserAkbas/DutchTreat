@@ -22,13 +22,21 @@ namespace DutchTreat.Controllers
             //throw new InvalidProgramException("Bad things happen to good developers");
         }
 
+        //1-Bu bir get işleminde çağırılacak ki bu da bir sayfayı almanın basit bir yoludur.
         [HttpGet("contact")]
         public IActionResult Contact()
         {
-            //sayfa başlığını doğrudan burada controller da ayarlamak için ViewBag.Titlr kullanıdı
+           
+            //throw new InvalidProgramException("Bad things happen");
+            return View();
+        }
 
-            ViewBag.Title = "Contact Us";
-            throw new InvalidProgramException("Bad things happen");
+        //2-Ancak tarayıcı bize bilgileri geri göndermek istediğinde,
+        //bunu bir post şeklinde yapacak ve sonra bu kod parçası çağırılacak
+        [HttpPost("contact")] //MVC de bunlar eşleştiğinde ne tür bir talep geldiğini söylüyor.
+        public IActionResult Contact(object model)
+        {
+            
             return View();
         }
 

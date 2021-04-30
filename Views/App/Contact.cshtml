@@ -1,0 +1,29 @@
+@*method="post" --> formu sunucuya geri göndermek içi gönderildiðinin söylenmesidir.*@
+@*input ve text alanlarýnýn her birinin kendisiyle iliþkilendirilmiþ bir adý olmasý gerekir 
+    aksi halde controller da post çaðrýsýnda model e veriler düþmez
+    iliþkilendirilmiþ alan [name="iliþkilendirilmiþAd"]
+    Bu ad , o input a veya text alanýna hangi verilerin nasýl yerleþtirileceðini ve 
+    gönderildiðinde buna ne ad verileceðini bilmek için kullanýlýr*@
+
+@{ 
+    ViewBag.Title = "Contact Us";
+}
+<form method="post">
+    <label>Your Name:</label>
+    <br />
+    <input name="name"/>
+    <br />
+    <label>Email:</label>
+    <br />
+    <input type="email"  name="email"/>
+    <br />
+    <label>Subject:</label>
+    <br />
+    <input type="text" name="subject"/>
+    <br />
+    <label>Message:</label>
+    <br />
+    <textarea rows="4" name="message"></textarea>
+    <br />
+    <input type="submit" value="Send Message" />
+</form>
