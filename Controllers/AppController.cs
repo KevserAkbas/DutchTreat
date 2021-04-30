@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DutchTreat.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,9 +35,11 @@ namespace DutchTreat.Controllers
         //2-Ancak tarayıcı bize bilgileri geri göndermek istediğinde,
         //bunu bir post şeklinde yapacak ve sonra bu kod parçası çağırılacak
         [HttpPost("contact")] //MVC de bunlar eşleştiğinde ne tür bir talep geldiğini söylüyor.
-        public IActionResult Contact(object model)
+        public IActionResult Contact(ContactViewModel model)
         {
-            
+            //input ve text alanlarının adları(name) veya formda kullandığımız alanı
+            //ContactViewModel in özelliklerine eşleyecektir.
+
             return View();
         }
 
