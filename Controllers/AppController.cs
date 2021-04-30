@@ -1,4 +1,5 @@
-﻿using DutchTreat.ViewModels;
+﻿using DutchTreat.Services;
+using DutchTreat.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,13 @@ namespace DutchTreat.Controllers
     //Bu sınıf MVC içindeki Controller Adlı bir sınıftan türetilecek
     public class AppController : Controller
     {
+        private readonly IMailService _mailService;
+
+        public AppController(IMailService mailService)
+        {
+            _mailService = mailService;
+        }
+
         //Controller, belirli bir eyleme gelen bir isteği eşlememize izin verir ve
         //bu eylem gerçek mantığın gerçekleşeceği yerdir.
 
@@ -44,12 +52,11 @@ namespace DutchTreat.Controllers
             //viewModel e koyululan kuralların gerçekten uygulandığından emin olma yoludur 
             if (ModelState.IsValid)
             { //çağrı geldiğinde ModelState in geçerli olup olmadığını kontrol eder
-                
+                _mailService.SendMessage("kevserakbas24@hotmail.com", model.Subject, $"From:{model.Name} - {model.Email},Message:{model.Message}");
+                ViewBag.UserMessage = "Mail Sent";
+                ModelState.Clear();//modeli-formu temizlemek için
             }
-            else
-            {
-                //ModelState geçerli 
-            }
+
             return View();
         }
 
