@@ -15,16 +15,35 @@ namespace DutchTreat
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
-        {
+        {  
             //AddControllersWithViews--> genellikle API senaryoları için
             services.AddControllersWithViews();
+
+            //Çalışma zamanı derlemesi
+            services.AddRazorPages().AddRazorRuntimeCompilation();
+            // AddRazorRuntimeCompilation --> sisteme Razor sayfasının değiştiği isteklerde Razor Sayfalarını yeniden derlemesini söylemek içindir.
+
+            services.AddRazorPages();
+            //        Startup da bunu seçmek gerekir, varsayılan olarak görünümlere sahip denetleyiciler eklemek yeterli değildir.
+            //Ayrıca services.AddRazorPages() eklemek gerekli -bu, razor sayfalrı için ihtiyacımız olan tüm parçaları ekler.
+            //
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment()) { //Geliştirme (Development) aşamasında göstermek için / Son kullanıcı görmez
-            app.UseDeveloperExceptionPage();//exception ları sayfada göstermek için / developer için
+            if (env.IsDevelopment())
+            { //Geliştirme (Development) aşamasında göstermek için / Son kullanıcı görmez
+                app.UseDeveloperExceptionPage();//exception ları sayfada göstermek için / developer için
+            }
+            else
+            {
+                //development aşamasında olmadığı zaman 
+                //istisnayı yakalayan bir pipeline a sahip olmamızı sağlar
+                //bizim için otomatik günlüğe kaydeder
+                app.UseExceptionHandler("/error"); //error --> istisnayı vereceği sayfa
+                //bunun için controller veya bir controlle da bir action(eylem) oluşturulmayacak
+                //Razor Pages kullanılacak
             }
 
             //web sunucumuzu bir şeyler yapacak şekilde yapılandırmak istediğimizi söylemek istiyoruz
@@ -36,6 +55,11 @@ namespace DutchTreat
             //Endpoints --> sunucuya gelen istekleri karşılamaya çalışmak için işlenecek bir ara yazılım kümesi belirlememize olanak tanır.
             app.UseEndpoints(cfg =>
             {
+
+                cfg.MapRazorPages(); //MapRazorPages diyerek onuda seçmemiz gerekir
+                                       //ve bu sadece derkii, varsayılan sayfayı,
+                                       //sahip olunan view adını ve razor sayfaları kullanılacak
+
                 //MapControllerRoute --> bir model oluşturmamıza izin verecektir
                 cfg.MapControllerRoute("Default", //bu yüzden varsayılan (default) yol olarak adlandırıldı.
                     "/{controller}/{action}/{id?}", //sonra aranan / id? --> isteğe bağlı (?, istağe bağlı olduğunu gösterir - null yapılabilir) 

@@ -1,0 +1,10 @@
+@*Razor sayfalarýnýn çalýmasýný saðlama için
+1-Sayfanýn @page bildirimi ile baþlamasý gerekir, sisteme bunun bir razor sayfasý olduðunu söyleyen budur
+2- Startup da bunu seçmek gerekir, varsayýlan olarak görünümlere sahip denetleyiciler eklemek yeterli deðildir.
+    Ayrýca services.AddRazorPages() eklemek gerekli - bu, razor sayfalrý için ihtiyacýmýz olan tüm parçalarý ekler.
+    Ama ayný zamanda MapRazorPages diyerek onuda seçmemiz gerekir
+    ve bu sadece derkii, varsayýlan sayfayý, sahip olunan view adýný ve razor sayfalarý kullanýlacak*@
+
+@page
+<h2>Sorry...</h2>
+<p>We have had a problem. Please retry later.</p>
