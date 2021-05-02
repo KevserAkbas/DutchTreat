@@ -7,7 +7,7 @@
 </head>
 <body>
     @*Baþlýk*@
-    <header class="container">
+    <header class="container-fluid">
         
         <nav class="navbar navbar-dark bg-dark navbar-expand-md">
             <h1 class="navbar-brand">Welcome to Dutch Treat</h1>
@@ -38,7 +38,7 @@
     @*Ana bölüm*@
     <section class="container">
 
-        <h2>@ViewBag.Title</h2>
+        <h2 class="text-center">@ViewBag.Title</h2>
 
         @* RenderBody --> bir cshtml dosyasýnýn gövdesini alacak ve onu oluþtururken buraya yapýþtýracak*@
         @RenderBody()
