@@ -2,11 +2,12 @@
 <html>
 <head>
     <title>Dutch Treat: @ViewBag.Title</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/css/site.css" rel="stylesheet" />
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
 </head>
 <body>
-    <header>
+    @*Baþlýk*@
+    <header class="container">
         <h1>Welcome to Dutch Treat</h1>
         <menu>
             <ul>
@@ -18,7 +19,8 @@
     </header>
 
     @* section -> sayfalarda deðiþmesi istenen görsel alan *@
-    <section>
+    @*Ana bölüm*@
+    <section class="container">
 
         <h2>@ViewBag.Title</h2>
 
@@ -26,13 +28,19 @@
         @RenderBody()
 
     </section>
-
-    <footer>Copyright 2021 Dutch Treat LLc</footer>
+    @*Alt Bilgi*@
+    <footer class="container">
+        <div class="text-center">
+            Copyright 2021 Dutch Treat LLc
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="~/js/index.js"></script>
 
-    @*RenderSection -> view ý kullanan sayfalarda onlarý sayfanýn belirli bölümlerine enjekte 
-        etmek için kullanýlabilecek bir bölüm oluþturmamýza olanak tanýr*@  
-    @RenderSection("Scripts",false)
+    @*RenderSection -> view ý kullanan sayfalarda onlarý sayfanýn belirli bölümlerine enjekte
+        etmek için kullanýlabilecek bir bölüm oluþturmamýza olanak tanýr*@
+    @RenderSection("Scripts", false)
 
 </body>
 </html>

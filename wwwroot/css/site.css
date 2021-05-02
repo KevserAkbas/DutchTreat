@@ -1,4 +1,4 @@
-﻿body {
+﻿/*body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -34,20 +34,20 @@ ul.product-props {
 
 .product-info {
     border: 1px solid grey;
-    display: inline-block; /*yan yana birden fazla blok olmasını söyler*/
-    padding: 5px;
+    display: inline-block;*/ /*yan yana birden fazla blok olmasını söyler*/
+    /*padding: 5px;
     margin: 2px;
     width: 450px;
     background-color: lightgray;
-    border-radius: 5px; /*çerçevenin köşeleri yuvarlak olur*/
-}
+    border-radius: 5px;*/ /*çerçevenin köşeleri yuvarlak olur*/
+/*}
 
     .product-info img {
         margin: 3px;
-        float: left; /*img nesnesi dışındaki nesnelrin sağında görünmesini engellemez*/
-        border: 1px solid black;
-        max-width: 150px; /*görselin maksimum genişliği*/
-    }
+        float: left;*/ /*img nesnesi dışındaki nesnelrin sağında görünmesini engellemez*/
+        /*border: 1px solid black;
+        max-width: 150px;*/ /*görselin maksimum genişliği*/
+    /*}
 
 #loginToggle {
     cursor: pointer;
@@ -82,4 +82,4 @@ menu li {
 
     menu li:last-of-type::after {
         content: "";
-    }
+    }*/
