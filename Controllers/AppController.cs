@@ -1,4 +1,5 @@
-﻿using DutchTreat.Services;
+﻿using DutchTreat.Data;
+using DutchTreat.Services;
 using DutchTreat.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,10 +13,12 @@ namespace DutchTreat.Controllers
     public class AppController : Controller
     {
         private readonly IMailService _mailService;
+        private readonly DutchContext _context;
 
-        public AppController(IMailService mailService)
+        public AppController(IMailService mailService, DutchContext context)
         {
             _mailService = mailService;
+            _context = context; //basitçe bir alan oluşturup onu depolayacak
         }
 
         //Controller, belirli bir eyleme gelen bir isteği eşlememize izin verir ve
@@ -64,6 +67,20 @@ namespace DutchTreat.Controllers
         {
             ViewBag.Title = "About Us";
             return View();
+        }
+
+        public IActionResult Shop()// Kullanıcılar için alışveriş sayfası
+        { //tüm ürünler için veritabanını sorgulayıp mağaza sayfasına göndermek için
+          //DutchContext sınıfına erişmek gerekir bunu da yukarıda constructor da
+          //(AppController) da yapılır
+
+            //var results = _context.Products
+            //    .OrderBy(p=>p.Category)//sorgulama / kategoriye göre sıralama - bunu bir bağlantı sorgusuyla da yapabilirz
+            //    .ToList(); //veritabanına gidecek, tüm ürünleri alacak ve iade edecek.
+            var results = from p in _context.Products
+                          orderby p.Category
+                          select p;
+            return View(results.ToList());//verileri view  a aktarıyoruz
         }
     }
 }
