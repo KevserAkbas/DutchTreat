@@ -25,7 +25,8 @@ namespace DutchTreat.Data
 
             if (!_ctx.Products.Any())
             {
-                var filePath = Path.Combine(_env.ContentRootPath, "Data/art.json");
+            
+               var filePath = Path.Combine(_env.ContentRootPath, "Data/art.json");
                 var json = File.ReadAllText(filePath);
                 var products = JsonSerializer.Deserialize<IEnumerable<Product>>(json);
                 _ctx.Products.AddRange(products);
@@ -33,7 +34,7 @@ namespace DutchTreat.Data
                 var order = new Order()
                 {
                     OrderDate = DateTime.Today,
-                    OrderNumber = "10000",
+                    OrderNumber = "1000",
                     Items = new List<OrderItem>()
                     {
                         new OrderItem()

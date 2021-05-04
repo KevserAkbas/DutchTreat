@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -15,28 +16,37 @@ namespace DutchTreat
 {
     public class Startup
     {
+        private readonly IConfiguration _config;
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+        public Startup(IConfiguration config)
+        {
+            _config = config;
+        }
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DutchContext>(cfg => 
             {
-                cfg.UseSqlServer();
+                cfg.UseSqlServer(_config.GetConnectionString("DutchContextDb"));
             });
-            services.AddTransient<DutchSeeder>();
+            
             services.AddTransient<IMailService,NullMailService>();
-           
+            services.AddScoped<IDutchRepository, DutchRepository>();
+            services.AddTransient<DutchSeeder>();
+            services.AddMvc();
+
             //AddControllersWithViews--> genellikle API senaryolarý için
-            services.AddControllersWithViews();
+            //services.AddControllersWithViews();
 
-            //Çalýþma zamaný derlemesi
-            services.AddRazorPages().AddRazorRuntimeCompilation();
-            // AddRazorRuntimeCompilation --> sisteme Razor sayfasýnýn deðiþtiði isteklerde Razor Sayfalarýný yeniden derlemesini söylemek içindir.
+            ////Çalýþma zamaný derlemesi
+            //services.AddRazorPages().AddRazorRuntimeCompilation();
+            //// AddRazorRuntimeCompilation --> sisteme Razor sayfasýnýn deðiþtiði isteklerde Razor Sayfalarýný yeniden derlemesini söylemek içindir.
 
-            services.AddRazorPages();
-            //        Startup da bunu seçmek gerekir, varsayýlan olarak görünümlere sahip denetleyiciler eklemek yeterli deðildir.
-            //Ayrýca services.AddRazorPages() eklemek gerekli -bu, razor sayfalrý için ihtiyacýmýz olan tüm parçalarý ekler.
-            //
+            //services.AddRazorPages();
+            ////        Startup da bunu seçmek gerekir, varsayýlan olarak görünümlere sahip denetleyiciler eklemek yeterli deðildir.
+            ////Ayrýca services.AddRazorPages() eklemek gerekli -bu, razor sayfalrý için ihtiyacýmýz olan tüm parçalarý ekler.
+            ////
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

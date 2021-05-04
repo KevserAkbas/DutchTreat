@@ -13,12 +13,13 @@ namespace DutchTreat.Controllers
     public class AppController : Controller
     {
         private readonly IMailService _mailService;
-        private readonly DutchContext _cxt;
+        private readonly IDutchRepository _repository;
 
-        public AppController(IMailService mailService, DutchContext cxt)
+        //Doğrudan kullanmak istemediğimiz için, aramalarımızı bigi havuzu (repository) üzerinden yapmak istiyoruz.
+        public AppController(IMailService mailService, IDutchRepository repository)
         {
             _mailService = mailService;
-            _cxt = cxt; //basitçe bir alan oluşturup onu depolayacak
+            _repository = repository;
         }
 
         //Controller, belirli bir eyleme gelen bir isteği eşlememize izin verir ve
@@ -28,8 +29,7 @@ namespace DutchTreat.Controllers
         // IActionResult --> burada olanları almanın, onu bir view a eşleştirmenin ve
         // nihayetinde geri getirmenin yollarından biridir. 
         public IActionResult Index()
-        {
-            var results = _cxt.Products.ToList();
+        {            
             return View();
             //throw new InvalidProgramException("Bad things happen to good developers");
         }
@@ -77,10 +77,8 @@ namespace DutchTreat.Controllers
             //var results = _context.Products
             //    .OrderBy(p=>p.Category)//sorgulama / kategoriye göre sıralama - bunu bir bağlantı sorgusuyla da yapabilirz
             //    .ToList(); //veritabanına gidecek, tüm ürünleri alacak ve iade edecek.
-            var results = from p in _context.Products
-                          orderby p.Category
-                          select p;
-            return View(results.ToList());//verileri view  a aktarıyoruz
+            var results = _repository.GetAllProducts();
+            return View(results);//verileri view  a aktarıyoruz
         }
     }
 }
