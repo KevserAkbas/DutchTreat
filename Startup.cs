@@ -23,9 +23,9 @@ namespace DutchTreat
             {
                 cfg.UseSqlServer();
             });
-
+            services.AddTransient<DutchSeeder>();
             services.AddTransient<IMailService,NullMailService>();
-
+           
             //AddControllersWithViews--> genellikle API senaryolarý için
             services.AddControllersWithViews();
 

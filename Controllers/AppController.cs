@@ -13,12 +13,12 @@ namespace DutchTreat.Controllers
     public class AppController : Controller
     {
         private readonly IMailService _mailService;
-        private readonly DutchContext _context;
+        private readonly DutchContext _cxt;
 
-        public AppController(IMailService mailService, DutchContext context)
+        public AppController(IMailService mailService, DutchContext cxt)
         {
             _mailService = mailService;
-            _context = context; //basitçe bir alan oluşturup onu depolayacak
+            _cxt = cxt; //basitçe bir alan oluşturup onu depolayacak
         }
 
         //Controller, belirli bir eyleme gelen bir isteği eşlememize izin verir ve
@@ -29,7 +29,7 @@ namespace DutchTreat.Controllers
         // nihayetinde geri getirmenin yollarından biridir. 
         public IActionResult Index()
         {
-
+            var results = _cxt.Products.ToList();
             return View();
             //throw new InvalidProgramException("Bad things happen to good developers");
         }
