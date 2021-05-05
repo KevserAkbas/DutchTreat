@@ -21,7 +21,7 @@ namespace DutchTreat.Data
         {
             try
             {
-                _logger.LogInformation("GetAllProducts was celled ");
+                _logger.LogInformation("GetAllProducts was called ");
 
                 return _ctx.Products
                         .OrderBy(p => p.Title)
