@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 namespace DutchTreat.Controllers
 {
     [Route("api/[Controller]")]
-   
-    public class OrdersController :Controller
+
+    public class OrdersController : Controller
     {
         private readonly IDutchRepository _repository;
         private readonly ILogger _logger;
@@ -41,7 +41,7 @@ namespace DutchTreat.Controllers
             try
             {
                 var order = _repository.GetOrderById(id);
-                if (order!=null)
+                if (order != null)
                 {
                     return Ok(order);
                 }
@@ -49,7 +49,7 @@ namespace DutchTreat.Controllers
                 {
                     return NotFound();
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -59,9 +59,25 @@ namespace DutchTreat.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(Order model)
+        public IActionResult Post([FromBody] Order model)
         {
-            return Ok();
+            try
+            {
+                _repository.AddEntity(model);
+                if (_repository.SaveAll()) //SaveAll() - degişiklikleri kaydetmesine izin vermek için
+                {
+                    return Created($"/api/orders/{model.Id}", model); //Created - 201 döndürür
+                }
+                 
+
+               
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Failed to save a new order:{ex}");
+            }
+
+            return BadRequest("Failed to save a new order");
         }
     }
 }

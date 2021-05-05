@@ -24,7 +24,7 @@ namespace DutchTreat.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(200)]//beklenen tüm farklı yanıt türlerini anlatmak için
+        [ProducesResponseType(200)]// ProducesResponseType - beklenen tüm farklı yanıt türlerini anlatmak için
         [ProducesResponseType(400)]
         public ActionResult<IEnumerable<Product>> Get()
         {

@@ -19,6 +19,11 @@ namespace DutchTreat.Data
             _logger = logger;
         }
 
+        public void AddEntity(object model)
+        {
+            _ctx.Add(model);
+        }
+
         public IEnumerable<Order> GetAllOrders()
         {
             return _ctx.Orders
