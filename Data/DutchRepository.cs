@@ -32,6 +32,14 @@ namespace DutchTreat.Data
                 .ToList();
         }
 
+        public IEnumerable<Order> GetAllOrders(bool includeItems)
+        {
+            return _ctx.Orders
+                .Include(o => o.Items)
+                .ThenInclude(i => i.Product)
+                .ToList();
+        }
+
         public IEnumerable<Product> GetAllProducts() //tüm ürünlerin listesini alacaktır.
         {
             try
