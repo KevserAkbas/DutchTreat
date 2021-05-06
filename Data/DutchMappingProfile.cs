@@ -20,6 +20,9 @@ namespace DutchTreat.Data
                 .ForMember(o => o.OrderId, ex => ex.MapFrom(o => o.Id))//istisna ayarlama yapıldı aksi halde id ler eşlenemiyo
                 .ReverseMap(); //sadece OrderViewModel için bir harita oluşturmakla kalmaz,
                                //aynı zamanda üye eşlemesini alır ve bizim için tersine çevirir.
+            CreateMap<OrderItem, OrderItemViewModel>()
+                .ReverseMap();
+        
         }
     }
 }
