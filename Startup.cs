@@ -1,8 +1,10 @@
 using DutchTreat.Data;
+using DutchTreat.Data.Entities;
 using DutchTreat.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,19 +30,25 @@ namespace DutchTreat
         }
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DutchContext>(cfg => 
+            services.AddIdentity<StoreUser, IdentityRole>(cfg =>
+             {
+                 cfg.User.RequireUniqueEmail = true; //birden fazla kullanýcý ayný e-postaya sahip olamaz.
+             })
+                .AddEntityFrameworkStores<DutchContext>(); //veritabanýnda depolanan farklý nesnelere ulaþmak istediðinde
+                                                           //ona kimlik içinde dahil olarak kullnacaðý baðlam türünü söyler
+            services.AddDbContext<DutchContext>(cfg =>
             {
                 cfg.UseSqlServer(_config.GetConnectionString("DutchContextDb"));
             });
-            
-            services.AddTransient<IMailService,NullMailService>();
+
+            services.AddTransient<IMailService, NullMailService>();
             services.AddScoped<IDutchRepository, DutchRepository>();
             services.AddTransient<DutchSeeder>();
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddControllersWithViews()
                 .AddRazorRuntimeCompilation()
-                .AddNewtonsoftJson(cfg => cfg.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore );
+                .AddNewtonsoftJson(cfg => cfg.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
             services.AddRazorPages();
             //services.AddMvc();
 
@@ -80,13 +88,16 @@ namespace DutchTreat
 
             app.UseRouting();//sunucuya gelen tek tek aramalrý belirli kod parçalarýna yönlendirmeyi saðlar. 
 
+            app.UseAuthentication();
+            app.UseAuthorization();
+
             //Endpoints --> sunucuya gelen istekleri karþýlamaya çalýþmak için iþlenecek bir ara yazýlým kümesi belirlememize olanak tanýr.
             app.UseEndpoints(cfg =>
             {
 
                 cfg.MapRazorPages(); //MapRazorPages diyerek onuda seçmemiz gerekir
-                                       //ve bu sadece derkii, varsayýlan sayfayý,
-                                       //sahip olunan view adýný ve razor sayfalarý kullanýlacak
+                                     //ve bu sadece derkii, varsayýlan sayfayý,
+                                     //sahip olunan view adýný ve razor sayfalarý kullanýlacak
 
                 //MapControllerRoute --> bir model oluþturmamýza izin verecektir
                 cfg.MapControllerRoute("Default", //bu yüzden varsayýlan (default) yol olarak adlandýrýldý.
