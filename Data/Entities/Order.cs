@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace DutchTreat.Data.Entities
 {
-  public class Order
-  {
-    public int Id { get; set; }
-    public DateTime OrderDate { get; set; }
-    public string OrderNumber { get; set; }        
-    public ICollection<OrderItem> Items { get; set; } //Bu, bir varlığı başka bir varlıkla ilişkilendirebilmemizin bir yoludur
+    public class Order
+    {
+        public int Id { get; set; }
+        public DateTime OrderDate { get; set; }
+        public string OrderNumber { get; set; }
+        public ICollection<OrderItem> Items { get; set; } //Bu, bir varlığı başka bir varlıkla ilişkilendirebilmemizin bir yoludur
+        public StoreUser User { get; set; }
     }
 }
