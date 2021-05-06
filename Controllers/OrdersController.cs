@@ -28,6 +28,7 @@ namespace DutchTreat.Controllers
             _mapper = mapper;
         }
         [HttpGet]
+
         public IActionResult Get(bool includeItems = true) //tüm koleysiyonu alma
         {
             try
