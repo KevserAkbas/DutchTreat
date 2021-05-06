@@ -1,0 +1,14 @@
+Database i silip baþtan kurma ve veri yükleme
+
+*dotnet ef database drop
+*dotnet ef database update
+*dotnet ef migrations add InitialDb
+*dotnet ef database update
+*dotnet run /seed
+--------------------------------------------------------
+dotnet run /seed
+* veritabaný yüklemesi
+
+dotnet ef database drop 
+* geliþtirme sýrasýnda, bazen oluþturulan migration lar eski sürümlerle uyumlu olmayabilir.
+*database i kaldýrýr- siler

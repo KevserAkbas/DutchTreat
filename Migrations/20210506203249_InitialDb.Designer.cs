@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DutchTreat.Migrations
 {
     [DbContext(typeof(DutchContext))]
-    [Migration("20210506155129_Identity")]
-    partial class Identity
+    [Migration("20210506203249_InitialDb")]
+    partial class InitialDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -47,7 +47,7 @@ namespace DutchTreat.Migrations
                         new
                         {
                             Id = 1,
-                            OrderDate = new DateTime(2021, 5, 6, 15, 51, 28, 256, DateTimeKind.Utc).AddTicks(4781),
+                            OrderDate = new DateTime(2021, 5, 6, 20, 32, 48, 256, DateTimeKind.Utc).AddTicks(7918),
                             OrderNumber = "12345"
                         });
                 });

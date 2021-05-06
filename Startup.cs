@@ -40,29 +40,16 @@ namespace DutchTreat
             {
                 cfg.UseSqlServer(_config.GetConnectionString("DutchContextDb"));
             });
-
-            services.AddTransient<IMailService, NullMailService>();
-            services.AddScoped<IDutchRepository, DutchRepository>();
-            services.AddTransient<DutchSeeder>();
-
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            services.AddTransient<IMailService, NullMailService>();
+            services.AddTransient<DutchSeeder>();
+            services.AddScoped<IDutchRepository, DutchRepository>();      
+
+            
             services.AddControllersWithViews()
                 .AddRazorRuntimeCompilation()
                 .AddNewtonsoftJson(cfg => cfg.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
-            services.AddRazorPages();
-            //services.AddMvc();
-
-            //AddControllersWithViews--> genellikle API senaryolarý için
-            //services.AddControllersWithViews();
-
-            ////Çalýþma zamaný derlemesi
-            //services.AddRazorPages().AddRazorRuntimeCompilation();
-            //// AddRazorRuntimeCompilation --> sisteme Razor sayfasýnýn deðiþtiði isteklerde Razor Sayfalarýný yeniden derlemesini söylemek içindir.
-
-            //services.AddRazorPages();
-            ////        Startup da bunu seçmek gerekir, varsayýlan olarak görünümlere sahip denetleyiciler eklemek yeterli deðildir.
-            ////Ayrýca services.AddRazorPages() eklemek gerekli -bu, razor sayfalrý için ihtiyacýmýz olan tüm parçalarý ekler.
-            ////
+            services.AddRazorPages();            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
