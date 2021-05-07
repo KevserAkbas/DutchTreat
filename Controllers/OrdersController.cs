@@ -4,6 +4,7 @@ using DutchTreat.Data.Entities;
 using DutchTreat.ViewModels;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -20,14 +21,17 @@ namespace DutchTreat.Controllers
         private readonly IDutchRepository _repository;
         private readonly ILogger _logger;
         private readonly IMapper _mapper;
+        private readonly UserManager<StoreUser> _userManager;
 
         public OrdersController(IDutchRepository repository,
             ILogger<OrdersController> logger,
-            IMapper mapper)
+            IMapper mapper,
+            UserManager<StoreUser> userManager)
         {
             _repository = repository;
             _logger = logger;
             _mapper = mapper;
+            _userManager = userManager;
         }
         [HttpGet]
 
@@ -70,7 +74,7 @@ namespace DutchTreat.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] OrderViewModel model)
+        public async Task<IActionResult> Post([FromBody] OrderViewModel model)
         {
             try
             {
@@ -82,6 +86,11 @@ namespace DutchTreat.Controllers
                         //orderDate belirtilmediyse 
                         newOrder.OrderDate = DateTime.Now;
                     }
+
+                    //mevcut kullanıcı almak içi
+                    var currenUser = await _userManager.FindByNameAsync(User.Identity.Name);
+                    newOrder.User = currenUser;
+
                     _repository.AddEntity(newOrder);
                     if (_repository.SaveAll()) //SaveAll() - degişiklikleri kaydetmesine izin vermek için
                     {
