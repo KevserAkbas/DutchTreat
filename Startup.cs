@@ -9,11 +9,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace DutchTreat
@@ -36,16 +38,28 @@ namespace DutchTreat
              })
                 .AddEntityFrameworkStores<DutchContext>(); //veritabanýnda depolanan farklý nesnelere ulaþmak istediðinde
                                                            //ona kimlik içinde dahil olarak kullnacaðý baðlam türünü söyler
+
+            services.AddAuthentication()
+                .AddCookie()
+                .AddJwtBearer(cfg=>
+                {
+                    cfg.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        ValidateIssuer= _config["Tokens:Issuer"],
+                        ValidateAudience= _config["Tokens:Audience"],
+                        IssuerSigningKey=new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]))
+                    };
+                });
+            
             services.AddDbContext<DutchContext>(cfg =>
             {
                 cfg.UseSqlServer(_config.GetConnectionString("DutchContextDb"));
             });
-            services.AddAutoMapper(Assembly.GetExecutingAssembly());
-            services.AddTransient<IMailService, NullMailService>();
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());            
             services.AddTransient<DutchSeeder>();
-            services.AddScoped<IDutchRepository, DutchRepository>();      
+            services.AddScoped<IDutchRepository, DutchRepository>();
+            services.AddTransient<IMailService, NullMailService>();
 
-            
             services.AddControllersWithViews()
                 .AddRazorRuntimeCompilation()
                 .AddNewtonsoftJson(cfg => cfg.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
