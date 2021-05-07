@@ -2,6 +2,8 @@
 using DutchTreat.Data;
 using DutchTreat.Data.Entities;
 using DutchTreat.ViewModels;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -14,6 +16,7 @@ namespace DutchTreat.Controllers
     //Burada asıl olay, öğeleri (Items) bireysel aramalarıyle eşleştirmemizdir
     //Rotayı Controller için ayarlama
     [Route("/api/orders/{orderid}/items")] //URL ayarlaması
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class OrderItemsController : Controller
     {
         private readonly IDutchRepository _repository;
@@ -33,7 +36,7 @@ namespace DutchTreat.Controllers
         public IActionResult Get(int orderId) //orderId - her aramada kullanacağımız parametre
                                               //URL de de parametre olarak bulunmaktadır
         {
-            var order = _repository.GetOrderById(orderId);
+            var order = _repository.GetOrderById(User.Identity.Name, orderId);
             if (order != null)
             {
                 //IEnumareble<OrderItem> den IEnumareble<OrderItemViewModel> e eşleme yapılır
@@ -47,11 +50,11 @@ namespace DutchTreat.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int orderId, int id)//rotada orderId ye ihtiyaç olduğu için orderId 
         {//tek bir Item ı id sine göre almanın etkili bir yolu
-            var order = _repository.GetOrderById(orderId);
+            var order = _repository.GetOrderById(User.Identity.Name, orderId);
             if (order != null)
             {
                 var item = order.Items.Where(i => i.Id == id).FirstOrDefault();
-                if (item!=null)
+                if (item != null)
                 {
                     //IEnumareble<OrderItem> den IEnumareble<OrderItemViewModel> e eşleme yapılır
                     return Ok(_mapper.Map<OrderItem, OrderItemViewModel>(item));
