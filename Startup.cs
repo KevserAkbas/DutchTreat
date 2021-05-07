@@ -38,15 +38,15 @@ namespace DutchTreat
              })
                 .AddEntityFrameworkStores<DutchContext>(); //veritabanýnda depolanan farklý nesnelere ulaþmak istediðinde
                                                            //ona kimlik içinde dahil olarak kullnacaðý baðlam türünü söyler
-
+            
             services.AddAuthentication()
                 .AddCookie()
                 .AddJwtBearer(cfg=>
                 {
                     cfg.TokenValidationParameters = new TokenValidationParameters()
                     {
-                        ValidateIssuer= _config["Tokens:Issuer"],
-                        ValidateAudience= _config["Tokens:Audience"],
+                        ValidateIssuer=false,
+                        ValidateAudience=false,
                         IssuerSigningKey=new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]))
                     };
                 });
