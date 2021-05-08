@@ -5,13 +5,23 @@
 
 @model IEnumerable<Product>
 @section Scripts{
-    <script src="~/ts/shopper.js"></script>
-    <script src="~/ts/main.js"></script>
+
+    <script src="~/client/vendor.js"></script>
+    <script src="~/client/polyfills.js"></script>
+    <script src="~/client/runtime.js"></script>
+    <script src="~/client/main.js" asp-append-version="true"></script>
 }
-<h1>Shop</h1>
-<p>Count:@Model.Count()</p>
+@section head{ 
+    <link href="~/client/styles.css" rel="stylesheet" />
+}
+
+<the-shop></the-shop>
+
+
+<!--<h1>Shop</h1>
+<p>Count:@Model.Count()</p>-->
 @*modeldeki her ürün için foreach kullanabiliriz*@
-<div class="row">
+<!--<div class="row">
     @foreach (var p in Model)
     {
         <div class="col-md-3">
@@ -28,4 +38,4 @@
             </div>
         </div>
     }
-</div>
+</div>-->
