@@ -1,10 +1,11 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
+import { error } from "console";
 import { Store } from "../services/store.service";
 
 @Component({
     selector: "login-page",
-    templateUrl:"loginPage.component.html"
+    templateUrl: "loginPage.component.html"
 })
 export class LoginPage {
     constructor(private store: Store, private router: Router) {
@@ -13,10 +14,23 @@ export class LoginPage {
 
     public creds = {
         username: "",
-        password:""
+        password: ""
     }
 
+    public errorMessage = "";
     onLogin() {
-        alert("Giriþ yapýn...");
+        this.store.login(this.creds)
+            .subscribe(() => {
+                //successfully logged in
+                if (this.store.order.items.length > 0) {
+                    this.router.navigate(["checkout"]);
+                }
+                else {
+                    this.router.navigate([""]);
+                }
+            }, error => {
+                    console.log(error);
+                    this.errorMessage = "Failed to login";
+            });
     }
 }

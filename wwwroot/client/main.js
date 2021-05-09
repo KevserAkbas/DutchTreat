@@ -111,7 +111,14 @@ class Store {
         }));
     }
     get loginRequired() {
-        return this.token.length === 0 || this.expiration < new Date();
+        return this.token.length === 0 || this.expiration > new Date();
+    }
+    login(creds) {
+        return this.http.post("/account/createtoken", creds)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_0__["map"])(data => {
+            this.token = data.token;
+            this.expiration = data.expiration;
+        }));
     }
     addToOrder(product) {
         let item;
