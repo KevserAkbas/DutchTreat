@@ -70,7 +70,6 @@ namespace DutchTreat.Controllers
             return View();
         }
 
-        [Authorize]
         public IActionResult Shop()// Kullanıcılar için alışveriş sayfası
         { //tüm ürünler için veritabanını sorgulayıp mağaza sayfasına göndermek için
           //DutchContext sınıfına erişmek gerekir bunu da yukarıda constructor da

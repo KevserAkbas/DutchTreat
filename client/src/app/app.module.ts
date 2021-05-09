@@ -8,6 +8,8 @@ import { CartView } from './views/cartView.component';
 import router from './router';
 import { ShopPage } from './pages/shopPage.component';
 import { Checkout } from './pages/checkout.component';
+import { LoginPage } from './pages/loginPage.component';
+import { AuthActivator } from './services/authActivator.service';
 
 @NgModule({
     declarations: [
@@ -15,7 +17,8 @@ import { Checkout } from './pages/checkout.component';
         ProductListView,
         CartView,
         ShopPage,
-        Checkout
+        Checkout,
+        LoginPage
     ],
     imports: [
         BrowserModule,
@@ -23,7 +26,8 @@ import { Checkout } from './pages/checkout.component';
         router
     ],
     providers: [
-        Store
+        Store,
+        AuthActivator
     ],
     bootstrap: [AppComponent]
 })
