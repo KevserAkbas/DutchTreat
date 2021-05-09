@@ -1,15 +1,13 @@
 import { Component } from "@angular/core";
+import { Store } from "../services/store.service";
 
 @Component({
     selector:"product-list",
     templateUrl:"productListView.component.html"
 })
 export default class ProductListView{
-    public products = [{
-        title: "Van Gogh Mug",
-        price:"19.99"
-    }, {
-            title: "Van Gogh Poster",
-            price: "29.99"
-        }]
+    public products = [];
+    constructor(private store: Store) {
+        this.products = store.products;
+    }
 }
