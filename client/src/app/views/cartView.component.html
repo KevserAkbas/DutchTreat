@@ -22,5 +22,10 @@
             <td>{{item.unitPrice * item.quantity | currency}}</td>
         </tr>
     </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="5"><strong> Subtotal:{{store.order.subtotal | currency}}</strong></td>
+        </tr>
+    </tfoot>
 </table>
 <hr />  

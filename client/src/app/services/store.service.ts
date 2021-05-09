@@ -29,7 +29,7 @@ export class Store {
 
         let item: OrderItem;
 
-        item = this.order.items.find(o => o.productArtId === product.artId);
+        item = this.order.items.find(o => o.productId === product.id);
 
         if (item) { //eklenen üründen daha önce sepette varsa onun sayýsýný 1 arttýr
             item.quantity++;
