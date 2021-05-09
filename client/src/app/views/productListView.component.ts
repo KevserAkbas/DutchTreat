@@ -1,13 +1,17 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Store } from "../services/store.service";
 
 @Component({
     selector:"product-list",
     templateUrl:"productListView.component.html"
 })
-export default class ProductListView{
-    public products = [];
-    constructor(private store: Store) {
-        this.products = store.products;
+export default class ProductListView implements OnInit {
+
+    constructor(public store: Store) {
+      
+    }
+    ngOnInit(): void {
+        this.store.loadProducts()
+            .subscribe(); /*operasyonu baþlatýr*/
     }
 }

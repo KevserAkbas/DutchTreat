@@ -1,13 +1,22 @@
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { map } from "rxjs/operators";
 
 @Injectable()
 
 export class Store {
-    public products = [{
-        title: "Van Gogh Mug",
-        price: "19.99"
-    }, {
-        title: "Van Gogh Poster",
-        price: "29.99"
-    }];
+
+    constructor(private http: HttpClient) {
+
+    }
+
+    public products = [];
+
+    loadProducts() {
+        return this.http.get<[]>("/api/products")
+            .pipe(map(data => {
+                this.products = data;
+                return;
+            }));
+    }
 }
