@@ -21,7 +21,8 @@ namespace DutchTreat.Data
                 .ReverseMap(); //sadece OrderViewModel için bir harita oluşturmakla kalmaz,
                                //aynı zamanda üye eşlemesini alır ve bizim için tersine çevirir.
             CreateMap<OrderItem, OrderItemViewModel>()
-                .ReverseMap();
+                .ReverseMap()
+                .ForMember(m=>m.Product,opt=>opt.Ignore());
         
         }
     }
