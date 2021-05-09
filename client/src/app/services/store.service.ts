@@ -13,7 +13,7 @@ export class Store {
 
     }
 
-    public products:Product[] = [];
+    public products: Product[] = [];
 
     public order: Order = new Order();
 
@@ -27,17 +27,30 @@ export class Store {
 
     addToOrder(product: Product) {
 
-        const newItem = new OrderItem();
+        let item: OrderItem;
 
-        newItem.productId = product.id;
-        newItem.productTitle = product.title;
-        newItem.productArtId = product.artId;
-        newItem.productArtist = product.artist;
-        newItem.productCategory = product.category;
-        newItem.productSize = product.category;
-        newItem.unitPrice = product.price;
-        newItem.quantity = 1;        
+        item = this.order.items.find(o => o.productArtId === product.artId);
 
-        this.order.items.push(newItem);
+        if (item) { //eklenen üründen daha önce sepette varsa onun sayýsýný 1 arttýr
+            item.quantity++;
+        }
+
+        else { // yoksa yeni ürünü sepete ekle
+            const item = new OrderItem();
+
+            item.productId = product.id;
+            item.productTitle = product.title;
+            item.productArtId = product.artId;
+            item.productArtist = product.artist;
+            item.productCategory = product.category;
+            item.productSize = product.category;
+            item.unitPrice = product.price;
+            item.quantity = 1;
+
+            this.order.items.push(item);
+        }
+
+
+        
     }
 }
