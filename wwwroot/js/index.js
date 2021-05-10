@@ -26,7 +26,4 @@ $(document).ready(function () {
     $loginToggle.on("click", function () {
         $popupForm.slideToggle(1000);
     });
-
-
-
 });
