@@ -2,25 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="wwwroot\img\けんたま\**" />
-    <Content Remove="wwwroot\img\けんたま\**" />
-    <EmbeddedResource Remove="wwwroot\img\けんたま\**" />
-    <None Remove="wwwroot\img\けんたま\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Remove="wwwroot\ts\main.ts" />
-    <Content Remove="wwwroot\ts\shopper.ts" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\App\" />
-    <Folder Include="Views\Account\" />
-    <Folder Include="Views\Shared\" />
-  </ItemGroup>
+  </PropertyGroup>  
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
@@ -39,5 +21,12 @@
     <TypeScriptCompile Include="wwwroot\ts\main.ts" />
     <TypeScriptCompile Include="wwwroot\ts\shopper.ts" />
   </ItemGroup>
+
+  <Target Name="MyPublishScripts" BeforeTargets="BeforePublish">
+    <Exec Command="npm install"></Exec>
+    <Exec Command="gulp"></Exec>
+    <Exec Command="npm install" WorkingDirectory=".\\client"></Exec>
+    <Exec Command="npm build --prod"></Exec>    
+  </Target>
 
 </Project>
